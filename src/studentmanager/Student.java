@@ -62,10 +62,6 @@ public class Student {
 		return index;
 	}
 	
-//	public int getday() {
-//		return index + 2;
-//	}
-	
 	//¸üĞÂÄÚÈİ
 	public void updata(boolean inishealth, String intime) {
 		index++;

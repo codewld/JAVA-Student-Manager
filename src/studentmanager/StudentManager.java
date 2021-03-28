@@ -31,7 +31,7 @@ public class StudentManager {
 					op.danger(stu); 
 					break;
 				case 6:
-					System.out.println("退出系统，再见。"); 
+					System.out.println("您已成功退出系统。"); 
 					System.exit(0);
 				default: 
 					System.out.println("输入错误，请重新输入:");
