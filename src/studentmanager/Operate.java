@@ -62,7 +62,7 @@ public class Operate {
 	}
 	
 	//每日信息录入
-	public void delete(Student[] stu) {
+	public void updata(Student[] stu) {
 		int i;
 		int length = index(stu); //获取学生个数
 		System.out.println("请输入学生的学号：");
@@ -99,27 +99,28 @@ public class Operate {
 	
 	
 	//查询学生每日情况
-		public void search(Student[] stu) {
-			int length = index(stu); //获取学生个数
-			System.out.println("请输入要查询的学号:");
-			int searchID = in.nextInt();
-			for (int i = 0; i < length; i++)
-				if (stu[i].getstuID() == searchID) {
-					System.out.println("已找到该学生!");
-					System.out.printf("学号：%d\n", stu[i].getstuID());
-					System.out.printf("姓名：%s\n", stu[i].getname());
-					for (int j = 0; j <= stu[i].getindex(); j++) {
-						if (stu[i].getdayheal(j)) {
-							System.out.printf("第%d天\t时间：%s\t健康与否：true\n", j + 1, stu[i].getdaytime(j));
-						}else {
-							System.out.printf("第%d天\t时间：%s\t健康与否：false\n", j + 1, stu[i].getdaytime(j));
-						}
+	public void search(Student[] stu) {
+		int length = index(stu); //获取学生个数
+		System.out.println("请输入要查询的学号:");
+		int searchID = in.nextInt();
+		for (int i = 0; i < length; i++)
+			if (stu[i].getstuID() == searchID) {
+				System.out.println("已找到该学生!");
+				System.out.printf("学号：%d\n", stu[i].getstuID());
+				System.out.printf("姓名：%s\n", stu[i].getname());
+				System.out.printf("学院：%s\n", stu[i].getcollege());
+				for (int j = 0; j <= stu[i].getindex(); j++) {
+					if (stu[i].getdayheal(j)) {
+						System.out.printf("第%d天\t时间：%s\t健康与否：true\n", j + 1, stu[i].getdaytime(j));
+					}else {
+						System.out.printf("第%d天\t时间：%s\t健康与否：false\n", j + 1, stu[i].getdaytime(j));
 					}
-					return;
 				}
-			System.out.println("未找到该学生!");
-			return;
-		}
+				return;
+			}
+		System.out.println("未找到该学生!");
+		return;
+	}
 	
 	//查看所有学生
 	public void display(Student[] stu) {
@@ -127,9 +128,9 @@ public class Operate {
 		System.out.println("所有学生的信息如下：");
 		for (int i = 0; i < length; i++) {
 			if (stu[i].getishealth()) {
-				System.out.printf("学号：%d\t姓名：%s\t健康与否：true\n",stu[i].getstuID(), stu[i].getname());
+				System.out.printf("学号：%d\t姓名：%s\t学院：%s\t健康与否：true\n",stu[i].getstuID(), stu[i].getname(), stu[i].getcollege());
 			}else {
-				System.out.printf("学号：%d\t姓名：%s\t健康与否：false\n",stu[i].getstuID(), stu[i].getname());
+				System.out.printf("学号：%d\t姓名：%s\t学院：%s\t健康与否：false\n",stu[i].getstuID(), stu[i].getname(), stu[i].getcollege());
 			}
 		}
 	}
@@ -139,10 +140,10 @@ public class Operate {
 		int length = index(stu); //获取学生个数
 		for (int i = 0; i < length; i++) {
 			if (!stu[i].getishealth()) {
-				System.out.printf("学号：%d\t姓名：%s\t健康与否：false\n",stu[i].getstuID(), stu[i].getname());
+				System.out.printf("学号：%d\t姓名：%s\t学院：%s\t健康与否：false\n",stu[i].getstuID(), stu[i].getname(), stu[i].getcollege());
 			}
 		}
-		System.out.println("以上就是危险学生信息，请尽快处理！");
+		System.out.println("以上为危险学生信息，请尽快处理！");
 	}
 	
 	 //获取当前学生的个数

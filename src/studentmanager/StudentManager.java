@@ -19,7 +19,7 @@ public class StudentManager {
 					op.add(stu, size);  //传入学生数组和数组大小
 					break;
 				case 2: 
-					op.delete(stu); 
+					op.updata(stu); 
 					break;
 				case 3: 
 					op.search(stu); 
