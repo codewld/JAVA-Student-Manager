@@ -7,26 +7,27 @@ public class Operate {
 	
 	//打印菜单
 	public void print() {
+		System.out.println("******欢迎进入学生管理系统******\n");
 		System.out.println("1、增加学生信息");
 		System.out.println("2、每日信息录入");
-		System.out.println("3、查询学生每日情况");
-		System.out.println("4、查看所有学生");
+		System.out.println("3、查询每日信息");
+		System.out.println("4、查询所有学生");
 		System.out.println("5、危险学生信息");
 		System.out.println("6、退出系统");
 		System.out.printf("请输入选项:");
 	}
 	
-	//添加信息
+	// 1.增加学生信息
 	public void add(Student[] stu, int size) {
-		int length = index(stu); //获取已存储的学生个数
+		int length = stunum(stu);  // 获取已存储的学生个数
 		if (length >= size) {
 			System.out.println("已存满"+size+"个学生！");
 			return;
 		}
-		//学号
+		
+		// 学号
 		System.out.printf("请输入学号：");
 		int id = in.nextInt();
-		in.nextLine();  //消除回车的影响
 		if (notstuID(id)) {
 			System.out.println("学号错误！");
 			return;
@@ -35,72 +36,77 @@ public class Operate {
 			System.out.println("该学生的信息已存在！");
 			return;
 		}
-		//姓名
+		
+		// 姓名
 		System.out.printf("请输入姓名：");
+		in.nextLine();  //消除回车的影响
 		String name = new String(in.nextLine());
 		
-		//是否健康
-		System.out.printf("请输入是否健康：1表示是0表示否");
+		// 体温
+		System.out.printf("请输入体温：");
+		double temperature = in.nextDouble();
+		
+		// 是否咳嗽
+		System.out.printf("请输入是否咳嗽：（1表示是 0表示否）");
 		int intishealth = in.nextInt();
-		boolean ishealth;
-		if (intishealth == 0) {
-			ishealth = false;
-		}
-		else {
-			ishealth = true;
+		boolean iscough = false;
+		if (intishealth == 1) {
+			iscough = true;
 		}
 		
-		//检查时间
+		// 检查时间
 		System.out.printf("请输入检查时间：");
 		in.nextLine();  //消除回车的影响
 		String time = new String(in.nextLine());
 		
-		
-		Student p = new Student(id, name, ishealth, time);
+		// 通过构造函数新建学生信息
+		Student p = new Student(id, name, temperature, iscough, time);
 		stu[length] = p;
 		System.out.println("添加成功！");
 	}
 	
-	//每日信息录入
+	// 2、每日信息录入
 	public void updata(Student[] stu) {
 		int i;
-		int length = index(stu); //获取学生个数
+		int length = stunum(stu); //获取学生个数
+		
+		// 判断学生是否存在，并找到他
 		System.out.println("请输入学生的学号：");
-		int deleteID = in.nextInt();
-		if (!exist(stu, deleteID)) {
+		int stuID = in.nextInt();
+		if (!exist(stu, stuID)) {
 			System.out.println("该学生的信息不存在！");
 			return;
 		}
 		for (i = 0; i < length; i++) {
-			if (deleteID == stu[i].getstuID())
+			if (stuID == stu[i].getstuID())
 				break;
 		}
 		
-		//是否健康
-		System.out.printf("请输入是否健康：1表示是0表示否");
+		// 体温
+		System.out.printf("请输入体温：");
+		double temperature = in.nextDouble();
+		
+		// 是否咳嗽
+		System.out.printf("请输入是否咳嗽：（1表示是 0表示否）");
 		int intishealth = in.nextInt();
-		boolean ishealth;
-		if (intishealth == 0) {
-			ishealth = false;
+		boolean iscough = false;
+		if (intishealth == 1) {
+			iscough = true;
 		}
-		else {
-			ishealth = true;
-		}
-				
-		//检查时间
+		
+		// 检查时间 
 		System.out.printf("请输入检查时间：");
 		in.nextLine();  //消除回车的影响
 		String time = new String(in.nextLine());
 		
-		stu[i].updata(ishealth, time);
+		// 通过update方法更新每日信息
+		stu[i].update(temperature, iscough, time);
 		System.out.println("已更新学生的今日检测数据");
 	 }
 	
-	
-	
-	//查询学生每日情况
+	// 3、查询每日信息
 	public void search(Student[] stu) {
-		int length = index(stu); //获取学生个数
+		int length = stunum(stu); //获取学生个数
 		System.out.println("请输入要查询的学号:");
 		int searchID = in.nextInt();
 		for (int i = 0; i < length; i++)
@@ -110,11 +116,8 @@ public class Operate {
 				System.out.printf("姓名：%s\n", stu[i].getname());
 				System.out.printf("学院：%s\n", stu[i].getcollege());
 				for (int j = 0; j <= stu[i].getindex(); j++) {
-					if (stu[i].getdayheal(j)) {
-						System.out.printf("第%d天\t时间：%s\t健康与否：true\n", j + 1, stu[i].getdaytime(j));
-					}else {
-						System.out.printf("第%d天\t时间：%s\t健康与否：false\n", j + 1, stu[i].getdaytime(j));
-					}
+					System.out.printf("第"+(j+1)+"天\t时间："+stu[i].gettime(j)+"\t体温："+stu[i].gettemperature(j)
+							+"\t 咳嗽："+stu[i].getiscough(j)+"\t健康："+stu[i].getishealth(j)+"\n");
 				}
 				return;
 			}
@@ -122,32 +125,29 @@ public class Operate {
 		return;
 	}
 	
-	//查看所有学生
+	// 4、查询所有学生
 	public void display(Student[] stu) {
-		int length = index(stu);  //获取学生个数
+		int length = stunum(stu);  //获取学生个数
 		System.out.println("所有学生的信息如下：");
 		for (int i = 0; i < length; i++) {
-			if (stu[i].getishealth()) {
-				System.out.printf("学号：%d\t姓名：%s\t学院：%s\t健康与否：true\n",stu[i].getstuID(), stu[i].getname(), stu[i].getcollege());
-			}else {
-				System.out.printf("学号：%d\t姓名：%s\t学院：%s\t健康与否：false\n",stu[i].getstuID(), stu[i].getname(), stu[i].getcollege());
-			}
+			System.out.printf("学号："+stu[i].getstuID()+"\t姓名："+stu[i].getname()+"\t学院："+stu[i].getcollege()
+					+"\t健康："+stu[i].getishealth(i)+"\n");
 		}
 	}
 	
-	//危险学生信息
+	// 5、危险学生信息
 	public void danger(Student[] stu) {
-		int length = index(stu); //获取学生个数
+		int length = stunum(stu); //获取学生个数
 		for (int i = 0; i < length; i++) {
 			if (!stu[i].getishealth()) {
-				System.out.printf("学号：%d\t姓名：%s\t学院：%s\t健康与否：false\n",stu[i].getstuID(), stu[i].getname(), stu[i].getcollege());
+				System.out.printf("学号：%d\t姓名：%s\t学院：%s\t健康：false\n",stu[i].getstuID(), stu[i].getname(), stu[i].getcollege());
 			}
 		}
 		System.out.println("以上为危险学生信息，请尽快处理！");
 	}
 	
 	 //获取当前学生的个数
-	private int index(Student[] stu) {
+	private int stunum(Student[] stu) {
 		for (int i = 0; i < stu.length; i++) {
 			if(stu[i] == null)    return i;
 		}
@@ -156,7 +156,7 @@ public class Operate {
 	 
 	//检索学生信息是否存在
 	private boolean exist(Student[] stu, int number) {
-		for (int i = 0; i < index(stu); i++) {
+		for (int i = 0; i < stunum(stu); i++) {
 			if (number == stu[i].getstuID())
 				return true;
 		}
