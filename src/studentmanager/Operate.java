@@ -10,7 +10,7 @@ public class Operate {
 		System.out.println("******欢迎进入学生管理系统******\n");
 		System.out.println("1、增加学生信息");
 		System.out.println("2、每日信息录入");
-		System.out.println("3、查询每日信息");
+		System.out.println("3、查询详细信息");
 		System.out.println("4、查询所有学生");
 		System.out.println("5、危险学生信息");
 		System.out.println("6、退出系统");
@@ -104,7 +104,7 @@ public class Operate {
 		System.out.println("已更新学生的今日检测数据");
 	 }
 	
-	// 3、查询每日信息
+	// 3、查询详细信息
 	public void search(Student[] stu) {
 		int length = stunum(stu); //获取学生个数
 		System.out.println("请输入要查询的学号:");

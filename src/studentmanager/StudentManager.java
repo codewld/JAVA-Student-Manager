@@ -6,10 +6,13 @@ public class StudentManager {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Scanner in = new Scanner(System.in);
-		int size = 100;  //学生数量
+		// 新建 Student 对象数组
+		int size = 1000;
 		Student[] stu = new Student[size];
+		// 新建 Operate 对象
 		Operate op = new Operate();
+		
+		Scanner in = new Scanner(System.in);
 		while(true) {
 			op.print(); //打印菜单
 			int option = in.nextInt();
@@ -23,7 +26,7 @@ public class StudentManager {
 					op.updata(stu); 
 					break;
 				case 3: 
-					// 3、查询每日信息
+					// 3、查询详细信息
 					op.search(stu); 
 					break;
 				case 4: 
