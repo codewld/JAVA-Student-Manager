@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Operate {
 	Scanner in = new Scanner(System.in);
 	
-	//打印菜单
+	// 打印菜单
 	public void print() {
 		System.out.println("******欢迎进入学生管理系统******\n");
 		System.out.println("1、增加学生信息");
@@ -146,7 +146,7 @@ public class Operate {
 		System.out.println("以上为危险学生信息，请尽快处理！");
 	}
 	
-	 //获取当前学生的个数
+	// 获取当前学生的个数
 	private int stunum(Student[] stu) {
 		for (int i = 0; i < stu.length; i++) {
 			if(stu[i] == null)    return i;
@@ -154,7 +154,7 @@ public class Operate {
 		return 0;
 	}
 	 
-	//检索学生信息是否存在
+	// 检索学生信息是否存在
 	private boolean exist(Student[] stu, int number) {
 		for (int i = 0; i < stunum(stu); i++) {
 			if (number == stu[i].getstuID())
@@ -163,7 +163,7 @@ public class Operate {
 		return false;
 	}
 	
-	//检索学生ID是否正确
+	// 检索学生ID是否正确
 	private boolean notstuID(int num) {
 		if (num/100000<=2019 && num/100000>=2016 && (num/1000)%100>=1 && (num/1000)%100<=12){
             return false;

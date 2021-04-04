@@ -17,7 +17,7 @@ public class Student {
 	private String[] time = new String[15];  //统计时间
 	private int index = -1;
 	 
-	//构造函数
+	// 构造函数
 	Student(){
 		
 	}
@@ -35,10 +35,10 @@ public class Student {
 		else
 			this.ishealth[index] = false;
 		this.time[index] = time;
-    }
+	}
 
 	
-	//输入
+	// 输入
 	public void setStuID(int stuID) {
 		this.stuID = stuID;
 	}
@@ -47,7 +47,7 @@ public class Student {
 		this.name = name;
 	}
 	
-	//获取信息
+	// 获取信息
 	public long getstuID() {
 		return stuID;
 	}
@@ -96,7 +96,7 @@ public class Student {
 		return index;
 	}
 	
-	//更新内容
+	// 更新内容
 	public void update(double temperature, boolean iscough, String time) {		
 		index++;
 		this.temperature[index] = temperature;
